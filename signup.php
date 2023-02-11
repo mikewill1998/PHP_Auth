@@ -37,17 +37,8 @@ session_start();
             $find_duplicate = "SELECT * FROM users WHERE user_email = '$user_email'";
             $find = mysqli_query($conn, $find_duplicate);
             
-            if ($find && mysqli_num_rows($find) > 0) {
+            if ($find && mysqli_num_rows($find) === 0) {
 
-                echo <<<EOT
-                <p>This email has been registered</p>
-                <a href="login.php">Click Here to login</a>
-                <br>
-                <a href="signup.php">Register with another email</a>
-                EOT;
-                exit;
-            }
-            else {
                 $user_id = random_num(20);
                 $query = "INSERT INTO users (user_id,user_name,user_email,password) VALUES ('$user_id','$user_name','$user_email','$hashed_pw')";
 
@@ -55,6 +46,10 @@ session_start();
 
                 header("Location: login.php");
                 exit;
+            }
+            else {
+                echo "This email has been registered";
+                
             }            
         }
         else {

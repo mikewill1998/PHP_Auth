@@ -33,6 +33,9 @@ session_start();
                         header("Location: index.php");
                         exit;
                     }
+                    else {
+                        echo "Invalid Credentials, Please Retry";
+                    }
                 }
             }
             else {
